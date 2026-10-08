@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* Short viewports (phones in landscape) */
+@custom-variant short (@media (max-height: 500px));
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    /* No pull-to-refresh / rubber-banding, no double-tap zoom, no tap flash */
+    overscroll-behavior: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+}
+
+.font-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* CRT Scanline Effect (subtle) */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Keep content clear of notches / rounded corners / home indicator */
+.app-root {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+}
+
+/* Game canvas must own all touches inside it (no scroll / zoom gestures) */
+.game-canvas {
+  touch-action: none;
+}
+
+/* On-screen controls: only on touch devices */
+.touch-controls {
+  display: none;
+}
+@media (pointer: coarse) {
+  .touch-controls {
+    display: flex;
+  }
+}
+/* Phones in landscape: float controls over the bottom corners of the play area */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
+  .touch-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 0.75rem 0.5rem;
+    pointer-events: none;
+    z-index: 20;
+  }
+}
+
+/* Portrait phones: the room is small, so suggest landscape */
+@media (pointer: coarse) and (orientation: portrait) {
+  .touch-portrait-hint {
+    display: block;
+  }
+}

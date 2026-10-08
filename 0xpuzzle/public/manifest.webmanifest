@@ -1,0 +1,16 @@
+{
+  "name": "0xPUZZLE: Binary & Hex Puzzle Game",
+  "short_name": "0xPUZZLE",
+  "description": "A 2D platformer where you solve binary and hexadecimal puzzles.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "landscape",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
